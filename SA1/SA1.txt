@@ -1,0 +1,28 @@
+Run following commands for Activity1 : Create executable virus file
+
+(windows)
+1. pip install pyinstaller
+    ### To install python library to create executable file
+
+2. pyinstaller --onefile filename  i.e windows.py
+    # Navigate to the folder in which we created our python file.
+    # Once inside the folder, let’s run the above command to create the exe file
+
+
+#You can find the executable in a directory named “dist” created in the same folder as the python file.
+
+
+(MAC / Linux)
+
+# In mac or linux save the file as mac.command
+#Next, we will open our terminal, navigate to the directory in which this file is saved, and then run the following command -
+
+#### chmod +x mac.command
+
+If the command doesn’t work, write “sudo” before the command.
+
+Now it’s ready. If we now double click on our file, it will create the .txt file.
+
+
+
+

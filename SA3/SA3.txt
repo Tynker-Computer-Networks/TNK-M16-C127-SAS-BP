@@ -1,0 +1,5 @@
+Open the profile page from the Toy Store website : https://tnk-m16-toywebsite.onrender.com/
+Create and Copy an order and paste it over the email
+Select the download button and click on add link option 
+Add the link of the virus file hosted on the github
+Send the email

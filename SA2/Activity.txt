@@ -1,0 +1,5 @@
+1. Open toy store website: https://tnk-m16-toywebsite.onrender.com/
+2. Place order
+3. Save the page
+4. Edit the order page
+5. Host it on github and generate the link
