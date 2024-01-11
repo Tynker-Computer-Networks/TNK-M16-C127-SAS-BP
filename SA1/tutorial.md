@@ -17,7 +17,7 @@ Follow the given steps to complete this activity.
    
    * Windows:
     ```
-    pyinstaller --onefile windows.py
+    pyinstaller --onefile windows.py 
     ```
 
 
